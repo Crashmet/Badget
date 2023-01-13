@@ -1,16 +1,19 @@
 <template>
   <div id="app">
-    <BudgetList :list="list" />
+    <TotalBalance :total="totalBalance" />
+    <BudgetList :list="list" @deleteItem="onDeleteItem" />
   </div>
 </template>
 
 <script>
 import BudgetList from './components/BudgetList.vue';
+import TotalBalance from './components/TotalBalance.vue';
 
 export default {
   name: 'App',
   components: {
     BudgetList,
+    TotalBalance,
   },
   data: () => ({
     list: {
@@ -28,6 +31,20 @@ export default {
       },
     },
   }),
+  computed: {
+    totalBalance() {
+      return Object.values(this.list).reduce(
+        (acc, item) => acc + item.value,
+        0
+      );
+    },
+  },
+  methods: {
+    onDeleteItem(id) {
+      this.$delete(this.list, id);
+      //этот метод принимает обьект из которого нужно удалить, вторым свойство которое нужно удалить, и вызовет перерендеринг
+    },
+  },
 };
 </script>
 
