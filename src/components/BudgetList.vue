@@ -1,0 +1,54 @@
+<template>
+  <div class="budget-list-wrap">
+    <El-card :header="header">
+      <template v-if="isEmty">
+        <div class="list-item" v-for="(item, prop) in list" :key="prop">
+          <span class="budget-comment">{{ item.comment }}</span>
+          <span class="budget-value">{{ item.value }}</span>
+          <ElButton type="danger">Delete</ElButton>
+        </div>
+      </template>
+      <ElAlert v-else type="info" :title="emtyTitle" :closable="false" />
+    </El-card>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'BudgetList',
+  props: {
+    list: {
+      type: Object,
+      default: () => ({}),
+    },
+  },
+  data: () => ({
+    header: 'Budget List',
+    emtyTitle: 'Empty List',
+  }),
+  computed: {
+    isEmty() {
+      return Boolean(Object.keys(this.list).length);
+    },
+  },
+};
+</script>
+
+<style scoped>
+.budget-list-wrap {
+  max-width: 50%;
+  margin: auto;
+}
+
+.list-item {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+}
+
+.budget-value {
+  font-weight: bold;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
