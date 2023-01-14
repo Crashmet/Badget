@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <FormList @submitForm="onFormSubmit" />
     <TotalBalance :total="totalBalance" />
     <BudgetList :list="list" @deleteItem="onDeleteItem" />
   </div>
@@ -8,12 +9,14 @@
 <script>
 import BudgetList from './components/BudgetList.vue';
 import TotalBalance from './components/TotalBalance.vue';
+import FormList from './components/Form.vue';
 
 export default {
   name: 'App',
   components: {
-    BudgetList,
+    FormList,
     TotalBalance,
+    BudgetList,
   },
   data: () => ({
     list: {
@@ -43,6 +46,14 @@ export default {
     onDeleteItem(id) {
       this.$delete(this.list, id);
       //этот метод принимает обьект из которого нужно удалить, вторым свойство которое нужно удалить, и вызовет перерендеринг
+    },
+    onFormSubmit(data) {
+      const newObj = {
+        ...data,
+        id: String(Math.random()),
+      };
+
+      this.$set(this.list, newObj.id, newObj);
     },
   },
 };
