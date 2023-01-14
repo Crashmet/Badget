@@ -50,10 +50,11 @@ export default {
     onFormSubmit(data) {
       const newObj = {
         ...data,
-        id: String(Math.random()),
+        id: Object.keys(this.list).length + 1,
       };
 
       this.$set(this.list, newObj.id, newObj);
+      // Vue не может отследить следующие изменения в массиве, обьекте, для этого используем метод $set
     },
   },
 };
