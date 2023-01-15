@@ -19,15 +19,24 @@ export default {
     BudgetList,
   },
   data: () => ({
+    iconIncome: 'el-icon-top',
+    colorIncome: '#67C23A',
+    iconOutcome: 'el-icon-bottom',
+    colorOutcome: '#F56C6C',
+
     list: {
       1: {
         type: 'INCOME',
+        icon: 'el-icon-top',
+        color: '#67C23A',
         value: 100,
         comment: 'Some income comment',
         id: 1,
       },
       2: {
         type: 'OUTCOME',
+        icon: 'el-icon-bottom',
+        color: '#F56C6C',
         value: -50,
         comment: 'Some outcome comment',
         id: 2,
@@ -44,12 +53,25 @@ export default {
   },
   methods: {
     onDeleteItem(id) {
+      const deleteQuestion = confirm('Хочешь удалить?');
+      if (!deleteQuestion) {
+        return;
+      }
+
       this.$delete(this.list, id);
       //этот метод принимает обьект из которого нужно удалить, вторым свойство которое нужно удалить, и вызовет перерендеринг
     },
     onFormSubmit(data) {
+      let { type, comment, value } = data;
+      let color, icon;
+      if (type === 'OUTCOME') {
+        value = -value;
+      }
+
       const newObj = {
-        ...data,
+        type,
+        comment,
+        value,
         id: Object.keys(this.list).length + 1,
       };
 

@@ -32,7 +32,7 @@ export default {
   name: 'FormList',
   data: () => ({
     formData: {
-      type: 'INCOME',
+      type: '',
       comment: '',
       value: 0,
     },

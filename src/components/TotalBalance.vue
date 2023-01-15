@@ -1,5 +1,7 @@
 <template>
-  <div class="total-value">Balance: {{ total }}</div>
+  <div class="total-value">
+    Balance: <span :style="{ color: checkTotal }">{{ total }}</span>
+  </div>
 </template>
 
 <script>
@@ -9,6 +11,16 @@ export default {
     total: {
       type: Number,
       default: 0,
+    },
+  },
+  data: () => ({
+    colorAboveZero: '#67C23A',
+    colorLessZero: '#F56C6C',
+  }),
+
+  computed: {
+    checkTotal() {
+      return this.total > -1 ? this.colorAboveZero : this.colorLessZero;
     },
   },
 };
