@@ -7,7 +7,7 @@
         item.value
       }}</span>
       <ElButton type="danger" size="mini" @click="deleteItemList(item.id)"
-        >Delete</ElButton
+        >Удалить</ElButton
       >
     </div>
   </div>

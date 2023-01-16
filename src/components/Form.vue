@@ -1,5 +1,5 @@
 <template>
-  <ElCard class="form-card">
+  <ElCard class="form-card" :header="header">
     <ElForm
       :model="formData"
       ref="addItemForm"
@@ -12,8 +12,8 @@
           v-model="formData.type"
           placeholder="Choose type..."
         >
-          <ElOption label="INCOME" value="INCOME" />
-          <ElOption label="OUTCOME" value="OUTCOME" />
+          <ElOption label="Доходы" value="INCOME" />
+          <ElOption label="Расходы" value="OUTCOME" />
         </ElSelect>
       </ElFormItem>
       <ElFormItem label="Comments" prop="comment">
@@ -22,7 +22,7 @@
       <ElFormItem label="Value" prop="value">
         <ElInput v-model.number="formData.value" />
       </ElFormItem>
-      <ElButton @click="onSubmit" type="primary">Submit</ElButton>
+      <ElButton @click="onSubmit" type="primary">Готово</ElButton>
     </ElForm>
   </ElCard>
 </template>
@@ -31,10 +31,11 @@
 export default {
   name: 'FormList',
   data: () => ({
+    header: 'Что нового?',
     formData: {
       type: '',
       comment: '',
-      value: 0,
+      value: '',
     },
     rules: {
       // правила для формы
@@ -73,6 +74,7 @@ export default {
 .form-card {
   max-width: 50%;
   margin: auto;
+  margin-bottom: 25px;
 }
 
 .type-select {

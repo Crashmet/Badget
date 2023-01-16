@@ -22,8 +22,8 @@ export default {
     },
   },
   data: () => ({
-    header: 'Budget List',
-    emtyTitle: 'Empty List',
+    header: 'Список бюджета',
+    emtyTitle: 'Список пуст',
   }),
   computed: {
     isEmty() {
